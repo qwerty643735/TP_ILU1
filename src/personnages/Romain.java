@@ -3,12 +3,15 @@ package personnages;
 public class Romain {
 	private String nom;
 	private int force;
+	private Equipement[] equipements;
+	private int nbEquipement = 0;
 
 	public Romain(String nom, int force) {
 		assert force > 0;
-		
+
 		this.nom = nom;
 		this.force = force;
+		this.equipements = new Equipement[Equipement.values().length];
 	}
 
 	public String getNom() {
@@ -16,7 +19,7 @@ public class Romain {
 	}
 
 	public void parler(String texte) {
-		System.out.println(prendreParole() + "ï¿½ " + texte + "ï¿½");
+		System.out.println(prendreParole() + " '" + texte + "' ");
 	}
 
 	private String prendreParole() {
@@ -28,18 +31,40 @@ public class Romain {
 		int forse_avant = force;
 		force -= forceCoup;
 		if (force > 0) {
-			parler("Aï¿½e");
+			parler("Aïe");
 		} else {
 			parler("J'abandonne...");
 		}
 		assert forse_avant > force;
 	}
-	
+
+	public void sEquiper(Equipement equip) {
+		switch (nbEquipement) {
+			case 2:
+				System.out.println("Le soldat " + nom + " est déjà bien protégé !");
+				break;
+			case 1: 
+				System.out.println("Le soldat " + nom + " possède déjà un " + equip.nom + " !");
+				break;
+			default:
+				System.out.println("Le soldat " + nom + " s'équipe avec un " + equip.nom + " !");
+				equipements[equip.ordinal()] = equip;
+				nbEquipement++;
+				break;
+		}
+	}
+
 	public static void main(String[] args) {
-		Romain romain = new Romain("romain", 3);
+		Romain romain = new Romain("Minus", 3);
 		System.out.println(romain);
 		romain.prendreParole();
 		romain.parler("Hello");
-		romain.recevoirCoup(4);
+		romain.recevoirCoup(1);
+
+		romain.sEquiper(Equipement.CASQUE);
+		romain.sEquiper(Equipement.BOUCLIER);
+		romain.recevoirCoup(1);
+		romain.recevoirCoup(1);
+
 	}
 }
