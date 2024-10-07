@@ -19,7 +19,5 @@ public class Scenario {
 		asterix.frapper(minus);
 		asterix.boirePotion(panoramix.getforcePotion());		
 		panoramix.booster(obelix);
-		
-		
 	}
 }

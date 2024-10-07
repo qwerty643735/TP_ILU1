@@ -38,19 +38,39 @@ public class Romain {
 		assert forse_avant > force;
 	}
 
+    private boolean possedeDejaEquipement(Equipement equip) {
+        for (int i = 0; i < nbEquipement; i++) {
+            if (equipements[i] == equip) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void equiper(Equipement equip){
+        System.out.println("Le soldat " + nom + " s'équipe avec un " + equip.toString() + " !");
+        equipements[nbEquipement] = equip;
+        nbEquipement++;
+    }
+
 	public void sEquiper(Equipement equip) {
 		switch (nbEquipement) {
 			case 2:
 				System.out.println("Le soldat " + nom + " est déjà bien protégé !");
 				break;
-			case 1: 
-				System.out.println("Le soldat " + nom + " possède déjà un " + equip.nom + " !");
+			case 1:
+                if(possedeDejaEquipement(equip)){
+                    System.out.println("Le soldat " + nom + " possède déjà un " + equip.toString() + " !");
+                    break;
+                }
+				else equiper(equip);
+                break;
+			case 0:
+                equiper(equip);
 				break;
-			default:
-				System.out.println("Le soldat " + nom + " s'équipe avec un " + equip.nom + " !");
-				equipements[equip.ordinal()] = equip;
-				nbEquipement++;
-				break;
+            default:
+                System.out.println("Erreur inattendue dans sEquiper");
+                break;
 		}
 	}
 
@@ -62,7 +82,9 @@ public class Romain {
 		romain.recevoirCoup(1);
 
 		romain.sEquiper(Equipement.CASQUE);
+        romain.sEquiper(Equipement.CASQUE);
 		romain.sEquiper(Equipement.BOUCLIER);
+        romain.sEquiper(Equipement.BOUCLIER);
 		romain.recevoirCoup(1);
 		romain.recevoirCoup(1);
 

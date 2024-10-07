@@ -4,13 +4,13 @@ public enum Equipement {
 	CASQUE("casque"),
 	BOUCLIER("bouclier");
 
-	String nom;
+	private String nom;
 
 	Equipement(String nom) {
 		this.nom = nom;
 	}
 
-	@Override
+    @Override
 	public String toString() {
 		return nom;
 	}
